@@ -8,15 +8,15 @@ const shadow = AWSIoT.thingShadow({
   keyPath: 'credentials/private.key',
   caPath: 'credentials/rootCA.pem',
   certPath: 'credentials/cert.pem',
-  clientId: config.thingName,
-  host: config.iotEndpoint
+  clientId: config.alexa-1,
+  host: config.axz9n9a1zk269-ats.iot.us-east-1.amazonaws.com
 });
 
 let clientTokenUpdate;
 
 shadow.on('connect', function () {
   console.log('Connected');
-  shadow.register(config.thingName, {}, function () {
+  shadow.register(config.alexa-1, {}, function () {
 
     const initState = {
       state: {
@@ -26,7 +26,7 @@ shadow.on('connect', function () {
       }
     };
 
-    clientTokenUpdate = shadow.update(config.thingName, initState);
+    clientTokenUpdate = shadow.update(config.alexa-1, initState);
 
     if (clientTokenUpdate === null) {
       console.log('update shadow failed, operation still in progress');
@@ -35,7 +35,7 @@ shadow.on('connect', function () {
     console.info('connected to IoT Core...\n');
 
     console.info('This is the QR Code shipped with the Device:');
-    let url = `${config.deviceBindingUrl}device/${config.thingName}`;
+    let url = `${config.https://master.d3a4dwcfkxzeol.amplifyapp.com}device/${config.alexa-1}`;
         QRCode.toString(url, {type: 'terminal'}, function (err, string) {
       if (err) throw err;
           console.log(string);
@@ -45,7 +45,7 @@ shadow.on('connect', function () {
 
 });
 
-shadow.on('delta', function (thingName, stateObject) {
+shadow.on('delta', function (alexa-1, stateObject) {
   const desiredPowerState = stateObject.state.powerState;
   const reportedState = {
     state: {
@@ -55,7 +55,7 @@ shadow.on('delta', function (thingName, stateObject) {
     }
   };
 
-  shadow.update(config.thingName, reportedState);
+  shadow.update(config.alexa-1, reportedState);
 
   console.info(`turn ${desiredPowerState} Smart Lamp`)
 });
